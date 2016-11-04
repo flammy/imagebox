@@ -87,7 +87,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 				case DOKU_LEXER_ENTER:
 					$renderer->doc.= '<div class="thumb2 t'.$match['align'].'" style="width:'.($match['w']?($match['w']+10).'px':'auto').'"><div class="thumbinner">';
 					if($match['exist'])
-						$renderer->$match['type']($match['src'],$match['title'],'box2',$match['width'],$match['height'],$match['cache'],$match['linking']);
+						$renderer->{$match['type']}($match['src'],$match['title'],'box2',$match['width'],$match['height'],$match['cache'],$match['linking']);
 					else
 						$renderer->doc.= 'Invalid Link';
 					$renderer->doc.= '<div class="thumbcaption">';
