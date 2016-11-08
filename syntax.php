@@ -10,17 +10,6 @@ require_once(DOKU_PLUGIN.'syntax.php');
 
 class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 
-	function getInfo(){
-		return array(
-			'author' => 'FFTiger / myst6re',
-			'email'  => 'myst6re@wikisquare.com',
-			'date'   => '2010-05-30',
-			'name'   => 'Imagebox Plugin',
-			'desc'   => 'Entoure les images avec un cadre de décoration.',
-			'url'    => 'http://www.wikisquare.com/',
-		);
-	}
-
 	function getType(){ return 'protected'; }
 	function getAllowedTypes() { return array('substition','protected','disabled','formatting'); }
 	function getSort(){ return 315; }
