@@ -13,7 +13,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 	function connectTo($mode) {	$this->Lexer->addEntryPattern('\[\{\{[^\|\}]+\|*(?=[^\}]*\}\}\])',$mode,'plugin_imagebox'); }
 	function postConnect() { $this->Lexer->addExitPattern('\}\}\]','plugin_imagebox'); }
 
-	function handle($match, $state, $pos, &$handler){
+	function handle($match, $state, $pos, Doku_Handler $handler){
 		switch($state){
 			case DOKU_LEXER_ENTER:
 				$match=Doku_Handler_Parse_Media(substr($match,3));
@@ -64,7 +64,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 		}
 	}
 
-	function render($mode, &$renderer, $data){
+	function render($mode, Doku_Renderer $renderer, $data){
 		if($mode == 'xhtml'){
 			list($state,$match) = $data;
 
