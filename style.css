@@ -30,7 +30,7 @@ padding:3px;
 div.thumb2 .mediabox2{
 background:#FFF none repeat scroll 0 0;
 margin:0;
-border:1px solid #CCC!important;
+/*border:1px solid #CCC!important;*/
 }
 html .thumbcaption{
 border:medium none;
