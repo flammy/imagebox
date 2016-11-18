@@ -75,7 +75,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 						$renderer->{$match['type']}($match['src'],$match['title'],'box2',$match['width'],$match['height'],$match['cache'],$match['linking']);
 					else
 						$renderer->doc.= 'Invalid Link';
-					$renderer->doc.= '<div class="thumbcaption" style="max-width: '.$match['width'].'px">';
+					$renderer->doc.= '<div class="thumbcaption" style="max-width: '.($match['width']-6).'px">';
 					if($match['detail']) {
 						$renderer->doc.= '<div class="magnify">';
 						$renderer->doc.= '<a class="internal" title="'.$this->getLang('enlarge').'" href="'.$match['detail'].'">';
