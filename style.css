@@ -18,9 +18,11 @@ margin:.5em 0 .8em 1.4em;
 }
 div.tcenter{
 clear:both;
+text-align: center;
 margin:.5em auto .8em auto;
 }
 div.thumb2 .thumbinner{
+display: inline-block;
 background-color:#F9F9F9;
 border:1px solid #CCC;
 font-size:94%;
