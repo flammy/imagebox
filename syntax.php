@@ -51,7 +51,8 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 					$match['w'] = $match['height']*$gimgs[0]/$gimgs[1]:
 					$match['w'] = $gimgs[0];
 				}
-
+                                $match['width'] = $match['w'];
+                                $match['height'] = $match['h'];
 				if(!$match['align'] || $match['align']=='center'&&!$this->getConf('center_align'))
 					$match['align'] = 'rien';
 			return array($state,$match);
