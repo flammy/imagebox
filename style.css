@@ -18,9 +18,11 @@ margin:.5em 0 .8em 1.4em;
 }
 div.tcenter{
 clear:both;
+text-align: center;
 margin:.5em auto .8em auto;
 }
 div.thumb2 .thumbinner{
+display: inline-block;
 background-color:#F9F9F9;
 border:1px solid #CCC;
 font-size:94%;
@@ -30,7 +32,7 @@ padding:3px;
 div.thumb2 .mediabox2{
 background:#FFF none repeat scroll 0 0;
 margin:0;
-border:1px solid #CCC!important;
+/*border:1px solid #CCC!important;*/
 }
 html .thumbcaption{
 border:medium none;

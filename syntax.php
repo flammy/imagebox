@@ -51,7 +51,8 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 					$match['w'] = $match['height']*$gimgs[0]/$gimgs[1]:
 					$match['w'] = $gimgs[0];
 				}
-
+                                $match['width'] = $match['w'];
+                                $match['height'] = $match['h'];
 				if(!$match['align'] || $match['align']=='center'&&!$this->getConf('center_align'))
 					$match['align'] = 'rien';
 			return array($state,$match);
@@ -70,12 +71,12 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 
 			switch($state){
 				case DOKU_LEXER_ENTER:
-					$renderer->doc.= '<div class="thumb2 t'.$match['align'].'" style="width:'.($match['w']?($match['w']+10).'px':'auto').'"><div class="thumbinner">';
+					$renderer->doc.= '<div class="thumb2 t'.$match['align'].'"><div class="thumbinner">';
 					if($match['exist'])
 						$renderer->{$match['type']}($match['src'],$match['title'],'box2',$match['width'],$match['height'],$match['cache'],$match['linking']);
 					else
 						$renderer->doc.= 'Invalid Link';
-					$renderer->doc.= '<div class="thumbcaption">';
+					$renderer->doc.= '<div class="thumbcaption" style="max-width: '.($match['width']-6).'px">';
 					if($match['detail']) {
 						$renderer->doc.= '<div class="magnify">';
 						$renderer->doc.= '<a class="internal" title="'.$this->getLang('enlarge').'" href="'.$match['detail'].'">';
