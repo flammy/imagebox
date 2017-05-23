@@ -2,6 +2,6 @@ base   imagebox
 author Lukas Rademacher, FFTiger & myst6re
 email  lukas@rademacher.ac
 date   2017-05-23
-name   Plugin imagebox
+name   LE Plugin imagebox
 desc   Syntax for display an image with a caption, like Wikipedia.org
 url    https://www.dokuwiki.org/plugin:imagebox
