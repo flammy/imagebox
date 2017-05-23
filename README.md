@@ -6,6 +6,4 @@ Syntax for display an image with a caption, like Wikipedia.org
 
 For details see: https://www.dokuwiki.org/plugin:imagebox
 
-Download: https://github.com/flammy/imagebox/tarball/le
-
-Bugtracker: https://github.com/flammy/imagebox/issues
+Download: https://github.com/CvH/imagebox/tarball/le
