@@ -1,7 +1,7 @@
 div.thumb2{
 margin-bottom:.5em;
 width:auto;
-float: left;
+display:table-cell;
 }
 div.trien{
 margin:.5em 1.4em .8em 0;
