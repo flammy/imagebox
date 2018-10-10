@@ -1,3 +1,4 @@
+<?php
 /**
  * English language file for the imagebox plugin
  *
