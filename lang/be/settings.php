@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Belarusian settings file for imagebox plugin
