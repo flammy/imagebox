@@ -19,6 +19,7 @@ div.tcenter {
 clear: both;
 text-align: center;
 margin: .5em auto .8em auto;
+display: table;
 }
 div.thumb2 .thumbinner {
 display: inline-block;
