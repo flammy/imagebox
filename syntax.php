@@ -1,4 +1,8 @@
 <?php
+/**
+ * @license    GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ * @author     FFTiger <fftiger@wikisquare.com>, myst6re <myst6re@wikisquare.com>
+ */
 
 if(!defined('DOKU_INC')) define('DOKU_INC',realpath(dirname(__FILE__).'/../../').'/');
 if(!defined('DOKU_PLUGIN')) define('DOKU_PLUGIN',DOKU_INC.'lib/plugins/');
