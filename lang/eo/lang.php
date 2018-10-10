@@ -1,4 +1,4 @@
-
+<?php
 /**
  * Esperanto language file for the imagebox plugin
  *
