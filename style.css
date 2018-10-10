@@ -1,4 +1,4 @@
-div.thumb2{
+div.thumb2 {
 margin-bottom:.5em;
 width:auto;
 }
@@ -15,7 +15,7 @@ clear:right;
 float:right;
 margin:.5em 0 .8em 1.4em;
 }
-div.tcenter{
+div.tcenter {
 clear:both;
 text-align: center;
 margin:.5em auto .8em auto;
@@ -31,7 +31,7 @@ padding:3px;
 div.thumb2 .mediabox2{
 background:#FFF none repeat scroll 0 0;
 margin:0;
-/*border:1px solid #CCC!important;*/
+/*border: 1px solid #CCC !important;*/
 }
 html .thumbcaption{
 border:medium none;
@@ -42,20 +42,21 @@ text-align:left;
 }
 div.thumb2 .magnify{
 background:transparent none repeat scroll 0 0;
-border:medium none!important;
+border: medium none !important;
 float:right;
 }
-div.thumb2 .magnify a,div.thumb2 .magnify img{
+div.thumb2 .magnify a,
+div.thumb2 .magnify img {
 background:transparent none repeat scroll 0 0;
-border:medium none!important;
-display:block;
+border: medium none !important;
+display: block;
 }
-div.thumb2 .interwiki{
-background-position:0 center;
-padding-left:17px;
+div.thumb2 .interwiki {
+background-position: 0 center;
+padding-left: 17px;
 }
-/* Uncomment these lines to force the edit button show up bellow the imagebox. */
-/* div.dokuwiki div.secedit input.button{
- * clear:both !important;
+/* Uncomment these lines to force the edit button show up below the imagebox. */
+/* div.dokuwiki div.secedit input.button {
+ * clear: both !important;
  * }
  */
