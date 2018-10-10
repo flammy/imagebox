@@ -1,4 +1,3 @@
-
 <?php
 /**
  * German settings file for imagebox plugin
