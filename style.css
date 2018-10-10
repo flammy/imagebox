@@ -1,16 +1,16 @@
 div.thumb2 {
-margin-bottom:.5em;
+margin-bottom: .5em;
 width:auto;
 }
-div.trien{
+div.trien {
 margin:.5em 1.4em .8em 0;
 }
-div.tleft{
+div.tleft {
 clear:left;
 float:left;
 margin:.5em 1.4em .8em 0;
 }
-div.tright{
+div.tright {
 clear:right;
 float:right;
 margin:.5em 0 .8em 1.4em;
@@ -20,7 +20,7 @@ clear:both;
 text-align: center;
 margin:.5em auto .8em auto;
 }
-div.thumb2 .thumbinner{
+div.thumb2 .thumbinner {
 display: inline-block;
 background-color:#F9F9F9;
 border:1px solid #CCC;
@@ -28,19 +28,19 @@ font-size:94%;
 overflow:hidden;
 padding:3px;
 }
-div.thumb2 .mediabox2{
+div.thumb2 .mediabox2 {
 background:#FFF none repeat scroll 0 0;
 margin:0;
 /*border: 1px solid #CCC !important;*/
 }
-html .thumbcaption{
+html .thumbcaption {
 border:medium none;
 font-size:94%;
 line-height:1.4em;
 padding:3px;
 text-align:left;
 }
-div.thumb2 .magnify{
+div.thumb2 .magnify {
 background:transparent none repeat scroll 0 0;
 border: medium none !important;
 float:right;
