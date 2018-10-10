@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Dutch settings file for imagebox plugin
