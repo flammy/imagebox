@@ -53,7 +53,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 				}
                                 $match['width'] = $match['w'];
                                 $match['height'] = $match['h'];
-				if(!$match['align'] || $match['align']=='center'&&!$this->getConf('center_align'))
+				if(!$match['align'] /*|| $match['align']=='center'*/&&!$this->getConf('center_align'))
 					$match['align'] = 'rien';
 			return array($state,$match);
 
@@ -79,7 +79,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 					$renderer->doc.= '<div class="thumbcaption" style="max-width: '.($match['width']-6).'px">';
 					if($match['detail']) {
 						$renderer->doc.= '<div class="magnify">';
-						$renderer->doc.= '<a class="internal" title="'.$this->getLang('enlarge').'" href="'.$match['detail'].'">';
+						$renderer->doc.= '<a class="internal" title="'.$this->getLang('enlarge').'" href="'.$match['detail'].'" target="_blank">';
 						$renderer->doc.= '<img width="15" height="11" alt="" src="'.DOKU_BASE.'lib/plugins/imagebox/magnify-clip.png"/>';
 						$renderer->doc.= '</a></div>';
 					}
