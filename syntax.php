@@ -70,6 +70,22 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 	}
 
 	function render($mode, Doku_Renderer $renderer, $data){
+
+		global $ID;
+                if($mode == 'metadata'){
+			list($state,$match) = $data;
+
+			switch($state){
+				case DOKU_LEXER_ENTER:
+                                    list ($src) = explode('#', $match['src'], 2);
+                                    if(media_isexternal($src)) return;
+                                    resolve_mediaid(getNS($ID), $src, $exists);
+                                    $renderer->meta['relation']['media'][$src] = $exists;
+                                    $renderer->persistent['relation']['media'][$src] = $exists;
+                        }
+                }
+
+
 		if($mode == 'xhtml'){
 			list($state,$match) = $data;
 
