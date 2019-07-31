@@ -21,42 +21,49 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 		switch($state){
 			case DOKU_LEXER_ENTER:
 				$match=Doku_Handler_Parse_Media(substr($match,3));
-				$match['w'] = $match['width'];
-				$dispMagnify = ($match['w'] || $match['height']) && $this->getConf('display_magnify')=='If necessary' || $this->getConf('display_magnify')=='Always';
-				
-				$gimgs = false;
+
+                $dispMagnify = ($match['width'] || $match['height']) && $this->getConf('display_magnify')=='If necessary' || $this->getConf('display_magnify')=='Always';
+
+				$image_size = false;
 				list($src,$hash) = explode('#',$match['src'],2);
-				
+
 				if($match['type']=='internalmedia') {
 					global $ID;
 					$exists = false;
 					resolve_mediaid(getNS($ID), $src, $exists);
-					
+
 					if($dispMagnify) {
 						$match['detail'] = ml($src,array('id'=>$ID,'cache'=>$match['cache']),($match['linking']=='direct'));
 						if($hash) $match['detail'] .= '#'.$hash;
 					}
-					
-					if($exists)	$gimgs = @getImageSize(mediaFN($src));
+
+					if($exists)	$image_size = @getImageSize(mediaFN($src));
 				}
 				else {
 					if($dispMagnify) {
 						$match['detail'] = ml($src,array('cache'=>'cache'),false);
 						if($hash) $match['detail'] .= '#'.$hash;
 					}
-					
-					$gimgs = @getImageSize($src);
-				}
-				
-				$match['exist'] = $gimgs!==false;
 
-				if(!$match['w'] && $match['exist']){
-					($match['height'])?
-					$match['w'] = $match['height']*$gimgs[0]/$gimgs[1]:
-					$match['w'] = $gimgs[0];
+					$image_size = @getImageSize($src);
 				}
-                                $match['width'] = $match['w'];
-                                $match['height'] = $match['h'];
+
+				$match['exist'] = $image_size!==false;
+
+                if($match['exist']){
+                    if(is_null($match['width']) && is_null($match['height'])) {
+                        $match['width'] = $image_size[0];
+                        $match['height'] = $image_size[1];
+                    }else {
+                        if (is_null($match['width'])) {
+                            $match['width'] = round($match['height'] * $image_size[0] / $image_size[1]);
+                        }
+                        if (is_null($match['height'])) {
+                            $match['height'] = round($match['width'] * $image_size[1] / $image_size[0]);
+                        }
+                    }
+                }
+
 				if(!$match['align'] /*|| $match['align']=='center'*/&&!$this->getConf('center_align'))
 					$match['align'] = 'rien';
 			return array($state,$match);
