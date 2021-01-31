@@ -77,7 +77,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 	}
 
 	function render($mode, Doku_Renderer $renderer, $data){
-		global $ID
+		global $ID;
 
         if($mode == 'metadata'){
 			list($state, $match) = $data;
