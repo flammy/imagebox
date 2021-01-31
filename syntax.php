@@ -87,7 +87,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 
 					// Use dokuwiki image metadata renderer
 					if(media_isexternal($src)) {
-						$renderer->internalmedia($src, $match['title']);
+						$renderer->externalmedia($src, $match['title']);
 					} else {
 						resolve_mediaid(getNS($ID), $src, $exists);
 						$renderer->internalmedia($src, $match['title']);
