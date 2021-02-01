@@ -28,6 +28,17 @@ class action_plugin_imagebox extends DokuWiki_Action_Plugin {
             $syntax = substr($match, 3);
         }
 
+        $left_blank = false;
+        $right_blank = false;
+        if (substr($syntax, 0, 1) == ' ') {
+            $left_blank = true;
+            $syntax = substr($syntax, 1);
+        }
+        if (substr($syntax, -1) == ' ') {
+            $right_blank = true;
+            $syntax = substr($syntax, 0, -1);
+        }
+
         list($src, $option) = array_pad(explode('?', $syntax, 2), 2, '');
 
         // Resolve new source.
@@ -42,8 +53,11 @@ class action_plugin_imagebox extends DokuWiki_Action_Plugin {
             return $match;
         } else {
             // Construct result.
-            $result = '[{{'.$new_src;
+            $result = '[{{';
+            if ($left_blank) $result .= ' ';
+            $result .= $new_src;
             if ($option) $result .= "?".$option;
+            if ($right_blank) $result .= ' ';
             $result .= "|";
 
             return $result;
