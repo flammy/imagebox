@@ -81,6 +81,8 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
                 }else{
                     if($match['align']=='center' && !$this->getConf('center_align')){
                         $match['align'] = $this->getConf('default_alignment');
+                    }elseif($match['align']!='left' || $match['align']!='center' || $match['align']!='right'){
+                        $match['align'] = $this->getConf('default_alignment');
                     }
                 }
 			return array($state,$match);
@@ -125,6 +127,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 
 			switch($state){
 				case DOKU_LEXER_ENTER:
+                    $renderer->doc.= '<div class="imagebox media'.( $match['align']).'">';
                     $renderer->doc.= '<figure style="max-width: '.($match['width']-10).'px">';
                     if($match['exist']) {
                         $renderer->{$match['type']}($match['src'], $match['title'], 'box2', $match['width'], $match['height'], $match['cache'], $match['linking']);
