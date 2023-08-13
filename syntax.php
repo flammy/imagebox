@@ -25,16 +25,23 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
                 $dispMagnify = ($match['width'] || $match['height']) && $this->getConf('display_magnify')=='If necessary' || $this->getConf('display_magnify')=='Always';
 
 				$image_size = false;
-				list($src,$hash) = explode('#',$match['src'],2);
 
-				if($match['type']=='internalmedia') {
+                $result = explode('#',$match['src'],2);
+                if (isset($result[0])){
+                    $src = $result[0];
+                }
+                if(isset($result[1])){
+                    $hash = $result[1];
+                }
+
+				if(isset($src) && $match['type']=='internalmedia') {
 					global $ID;
 					$exists = false;
 					resolve_mediaid(getNS($ID), $src, $exists);
 
 					if($dispMagnify) {
 						$match['detail'] = ml($src,array('id'=>$ID,'cache'=>$match['cache']),($match['linking']=='direct'));
-						if($hash) $match['detail'] .= '#'.$hash;
+						if(isset($hash)) $match['detail'] .= '#'.$hash;
 					}
 
 					if($exists)	$image_size = @getImageSize(mediaFN($src));
@@ -42,7 +49,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 				else {
 					if($dispMagnify) {
 						$match['detail'] = ml($src,array('cache'=>'cache'),false);
-						if($hash) $match['detail'] .= '#'.$hash;
+						if(isset($hash)) $match['detail'] .= '#'.$hash;
 					}
 
 					$image_size = @getImageSize($src);
