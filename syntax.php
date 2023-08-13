@@ -84,20 +84,30 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 	}
 
 	function render($mode, Doku_Renderer $renderer, $data){
-
 		global $ID;
-                if($mode == 'metadata'){
-			list($state,$match) = $data;
+
+        if($mode == 'metadata'){
+			list($state, $match) = $data;
 
 			switch($state){
 				case DOKU_LEXER_ENTER:
-                                    list ($src) = explode('#', $match['src'], 2);
-                                    if(media_isexternal($src)) return;
-                                    resolve_mediaid(getNS($ID), $src, $exists);
-                                    $renderer->meta['relation']['media'][$src] = $exists;
-                                    $renderer->persistent['relation']['media'][$src] = $exists;
-                        }
-                }
+					list ($src) = explode('#', $match['src'], 2);
+
+					// Use dokuwiki image metadata renderer
+					if(media_isexternal($src)) {
+						$renderer->externalmedia($src, $match['title']);
+					} else {
+						resolve_mediaid(getNS($ID), $src, $exists);
+						$renderer->internalmedia($src, $match['title']);
+
+						// Clear previous persistent data
+						if (isset($renderer->persistent['relation']['media'][$src])) {
+							unset($renderer->persistent['relation']['media'][$src]);
+						}
+					}
+
+            }
+        }
 
 
 		if($mode == 'xhtml'){
