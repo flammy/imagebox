@@ -47,7 +47,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 
                         if ($exists){
                             $image_size = @getImageSize(mediaFN($src));
-                            $mime_type = explode('/',mime_content_type($src),2);
+                            $mime_type = explode('/',mime_content_type(mediaFN($src)),2);
                         }
                     } else {
                         if ($dispMagnify) {
