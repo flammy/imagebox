@@ -120,29 +120,33 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 
 			switch($state){
 				case DOKU_LEXER_ENTER:
-					$renderer->doc.= '<div class="thumb2 t'.$match['align'].'"><div class="thumbinner">';
-					if($match['exist'])
-						$renderer->{$match['type']}($match['src'],$match['title'],'box2',$match['width'],$match['height'],$match['cache'],$match['linking']);
-					else
-						$renderer->doc.= 'Invalid Link';
-					$renderer->doc.= '<div class="thumbcaption" style="max-width: '.($match['width']-6).'px">';
-					if(isset($match['detail'])) {
-						$renderer->doc.= '<div class="magnify">';
-						$renderer->doc.= '<a class="internal" title="'.$this->getLang('enlarge').'" href="'.$match['detail'].'" target="_blank">';
-						$renderer->doc.= '<img width="15" height="11" alt="" src="'.DOKU_BASE.'lib/plugins/imagebox/magnify-clip.png"/>';
-						$renderer->doc.= '</a></div>';
-					}
-				break;
-
+                    $renderer->doc.= '<figure style="max-width: '.($match['width']-10).'px">';
+                    if($match['exist']) {
+                        $renderer->{$match['type']}($match['src'], $match['title'], 'box2', $match['width'], $match['height'], $match['cache'], $match['linking']);
+                    }else{
+                        $renderer->doc.= 'Invalid Link';
+                    }
+                    $renderer->doc.= '<figcaption>';
+                    if(isset($match['detail'])) {
+                        $renderer->doc.= '<div class="magnify">';
+                        $renderer->doc.= '<a class="internal" title="'.$this->getLang('enlarge').'" href="'.$match['detail'].'" target="_blank">';
+                        $renderer->doc.= '<img class="mediaright" width="15" height="11" alt="" src="'.DOKU_BASE.'lib/plugins/imagebox/magnify-clip.png"/>';
+                        $renderer->doc.= '</a></div>';
+                    }
+				    break;
 				case DOKU_LEXER_UNMATCHED:
-					$style=$this->getConf('default_caption_style');
-					if($style=='Italic')	$renderer->doc .= '<em>'.$renderer->_xmlEntities($match).'</em>';
-					elseif($style=='Bold')	$renderer->doc .= '<strong>'.$renderer->_xmlEntities($match).'</strong>';
-					else 					$renderer->doc .= $renderer->_xmlEntities($match);
-				break;
-
+                    $style=$this->getConf('default_caption_style');
+                    if($style=='Italic'){
+                        $renderer->doc .= '<em>'.$renderer->_xmlEntities($match).'</em>';
+                    }
+                    elseif($style=='Bold'){
+                        $renderer->doc .= '<strong>'.$renderer->_xmlEntities($match).'</strong>';
+                    }else{
+                        $renderer->doc .= $renderer->_xmlEntities($match);
+                    }
+				    break;
 				case DOKU_LEXER_EXIT:
-					$renderer->doc.= '</div></div></div>';
+					$renderer->doc.= '</figcaption></figure></div>';
 				break;
 			}
 			return true;
