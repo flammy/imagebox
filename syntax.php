@@ -45,7 +45,10 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
                             if (isset($hash)) $match['detail'] .= '#' . $hash;
                         }
 
-                        if ($exists) $image_size = @getImageSize(mediaFN($src));
+                        if ($exists){
+                            $image_size = @getImageSize(mediaFN($src));
+                            $mime_type = explode('/',mime_content_type($src),2);
+                        }
                     } else {
                         if ($dispMagnify) {
                             $match['detail'] = ml($src, array('cache' => 'cache'), false);
@@ -53,10 +56,11 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
                         }
 
                         $image_size = @getImageSize($src);
+                        $mime_type = explode('/',mime_content_type($src),2);
                     }
                 }
 
-				$match['exist'] = $image_size!==false;
+				$match['exist'] = ($image_size!==false || (isset($mime_type[0]) && $mime_type[0] == "image")) ;
 
                 if($match['exist']){
                     if(is_null($match['width']) && is_null($match['height'])) {
