@@ -76,8 +76,13 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
                     }
                 }
 
-				if(!$match['align'] /*|| $match['align']=='center'*/&&!$this->getConf('center_align'))
-					$match['align'] = 'rien';
+                if(!isset($match['align'])){
+                    $match['align'] = $this->getConf('default_alignment');
+                }else{
+                    if($match['align']=='center' && !$this->getConf('center_align')){
+                        $match['align'] = $this->getConf('default_alignment');
+                    }
+                }
 			return array($state,$match);
 
 			case DOKU_LEXER_UNMATCHED:
@@ -124,7 +129,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
                     if($match['exist']) {
                         $renderer->{$match['type']}($match['src'], $match['title'], 'box2', $match['width'], $match['height'], $match['cache'], $match['linking']);
                     }else{
-                        $renderer->doc.= 'Invalid Link';
+                        $renderer->doc.= $this->getLang('invalid-image-file');
                     }
                     $renderer->doc.= '<figcaption>';
                     if(isset($match['detail'])) {
