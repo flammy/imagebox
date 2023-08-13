@@ -22,9 +22,10 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 			case DOKU_LEXER_ENTER:
 				$match=Doku_Handler_Parse_Media(substr($match,3));
 
-                $dispMagnify = ($match['width'] || $match['height']) && $this->getConf('display_magnify')=='If necessary' || $this->getConf('display_magnify')=='Always';
+                $display_magnify = (isset($match['width']) || isset($match['height'])) && $this->getConf('display_magnify')=='If necessary' || $this->getConf('display_magnify')=='Always';
 
 				$image_size = false;
+                $mime_type = [];
 
                 $result = explode('#',$match['src'],2);
                 if (isset($result[0])){
@@ -37,28 +38,30 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
                 if(!empty($src)) {
                     if ($match['type'] == 'internalmedia') {
                         global $ID;
+
                         $exists = false;
                         resolve_mediaid(getNS($ID), $src, $exists);
 
-                        if ($dispMagnify) {
-                            $match['detail'] = ml($src, array('id' => $ID, 'cache' => $match['cache']), ($match['linking'] == 'direct'));
-                            if (isset($hash)) $match['detail'] .= '#' . $hash;
-                        }
-
                         if ($exists){
+                            if ($display_magnify) {
+                                $match['detail'] = ml($src, array('id' => $ID, 'cache' => $match['cache']), ($match['linking'] == 'direct'));
+                            }
+
                             $image_size = @getImageSize(mediaFN($src));
                             $mime_type = explode('/',mime_content_type(mediaFN($src)),2);
                         }
                     } else {
-                        if ($dispMagnify) {
+                        if ($display_magnify) {
                             $match['detail'] = ml($src, array('cache' => 'cache'), false);
-                            if (isset($hash)) $match['detail'] .= '#' . $hash;
                         }
 
                         $image_size = @getImageSize($src);
                         $mime_type = explode('/',mime_content_type($src),2);
                     }
                 }
+
+                if (isset($hash)) $match['detail'] .= '#' . $hash;
+
 
 				$match['exist'] = ($image_size!==false || (isset($mime_type[0]) && $mime_type[0] == "image")) ;
 
@@ -88,10 +91,10 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 			return array($state,$match);
 
 			case DOKU_LEXER_UNMATCHED:
-			return array($state,$match);
+			    return array($state,$match);
 
 			case DOKU_LEXER_EXIT:
-			return array($state,$match);
+			    return array($state,$match);
 		}
 	}
 
@@ -109,6 +112,7 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 					if(media_isexternal($src)) {
 						$renderer->externalmedia($src, $match['title']);
 					} else {
+                        $exists = false;
 						resolve_mediaid(getNS($ID), $src, $exists);
 						$renderer->internalmedia($src, $match['title']);
 
@@ -117,7 +121,6 @@ class syntax_plugin_imagebox extends DokuWiki_Syntax_Plugin {
 							unset($renderer->persistent['relation']['media'][$src]);
 						}
 					}
-
             }
         }
 
