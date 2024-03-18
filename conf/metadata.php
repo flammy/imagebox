@@ -7,3 +7,4 @@
 $meta['display_magnify'] = array('multichoice','_choices' => array('If necessary','Always','Never'));
 $meta['default_caption_style'] = array('multichoice','_choices' => array('Normal','Italic','Bold'));
 $meta['center_align'] = array('onoff');
+$meta['default_alignment'] = array('multichoice','_choices' => array('left','center','right'));

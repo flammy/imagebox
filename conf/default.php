@@ -7,3 +7,4 @@
 $conf['display_magnify'] = 'If necessary';
 $conf['default_caption_style'] = 'Normal';
 $conf['center_align'] = 1;
+$conf['default_alignment'] = 'left';

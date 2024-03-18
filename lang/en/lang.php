@@ -5,3 +5,4 @@
  * @author FFTiger / myst6re <myst6re@wikisquare.com>
  */
 $lang['enlarge'] = 'Enlarge';
+$lang['invalid-image-file'] = 'invalid image file';
